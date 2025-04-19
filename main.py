@@ -1,6 +1,7 @@
 import plotly.express as px
 import streamlit as st
 from backend import get_data
+import pandas as pd
 #from main import image_path
 
 st.title("Weather Forecast for the Next Days")
@@ -15,10 +16,15 @@ if place:
         data,dates = get_data(place, days, option)
 
         if option == "Temperature":
+            df = pd.DataFrame({
+                'Date': dates,
+                'Temperature': data
+            })
             figure = px.line(
-                x=dates,
-                y=data,
-                labels={"x": "Date", "y": "Temperature (°C)"}
+                df,
+                x='Date',
+                y='Temperature',
+                labels={"Date": "Date", "Temperature": "Temperature (°C)"}
             )
             st.plotly_chart(figure)
         if option == "Sky":
