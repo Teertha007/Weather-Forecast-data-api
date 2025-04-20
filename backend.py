@@ -1,6 +1,6 @@
 import requests
 
-API_KEY = 
+API_KEY = ""
 
 
 def get_data(place, days, kind):
@@ -14,9 +14,10 @@ def get_data(place, days, kind):
     dates = [dict["dt_txt"] for dict in filtered_data]
 
     if kind == "Temperature":
-        filtered_temp = [dict["main"]["temp"] for dict in filtered_data]
-        filtered_temp_data = [round(temp - 273.15, 2) for temp in filtered_temp]
-        return filtered_temp_data,dates
+        filtered_temp = [dict["main"]["temp"]/10 for dict in filtered_data]
+       # filtered_temp_data = [round(temp - 273.15, 2) for temp in filtered_temp]
+        return filtered_temp,dates
+
     elif kind == "Sky":
         filtered_sky_data = [dict["weather"][0]["main"] for dict in filtered_data]
         return filtered_sky_data, dates

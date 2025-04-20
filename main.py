@@ -31,7 +31,6 @@ if place:
             images = {"Clear": "images/clear.png", "Clouds": "images/cloud.png",
                       "Rain": "images/rain.png","Snow": "images/snow.png"}
             image_path = [ images [condition] for condition in data]
-            print(data)
             st.image(image_path,width=115, caption=data)
-    except Exception as e:
-        st.error(f"Error: {str(e)}")
+    except KeyError:
+        st.error("This place is not found in the database.Please try again.")
